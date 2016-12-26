@@ -30,7 +30,7 @@ public class TalkBackActivity extends BaseActivity {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    Toast.makeText(TalkBackActivity.this, "tt", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TalkBackActivity.this, "ttt", Toast.LENGTH_SHORT).show();
                     break;
             }
             return false;
