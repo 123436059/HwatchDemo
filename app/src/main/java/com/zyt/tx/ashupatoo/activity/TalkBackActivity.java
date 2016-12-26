@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zyt.tx.ashupatoo.R;
 
@@ -29,7 +30,7 @@ public class TalkBackActivity extends BaseActivity {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-
+                    Toast.makeText(TalkBackActivity.this, "tt", Toast.LENGTH_SHORT).show();
                     break;
             }
             return false;
