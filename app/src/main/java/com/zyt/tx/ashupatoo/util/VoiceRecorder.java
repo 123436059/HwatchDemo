@@ -9,7 +9,6 @@ import android.os.SystemClock;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.concurrent.RunnableFuture;
 
 /**
  * Created by MJS on 2016/12/27.
@@ -26,14 +25,14 @@ public class VoiceRecorder {
 
     private static final int DEFAULT_MAX_DURATION = 10;
     private int maxRecordDuration = 0;
-    private boolean isRecording = false;
+    public boolean isRecording = false;
     private long startTime;
 
     public VoiceRecorder(Handler handler) {
         mHandler = handler;
     }
 
-    public String startRecording(File file, Context context) {
+    public String startRecording(File file, Context context) throws Exception {
         mFile = null;
 
         if (mRecorder != null) {
@@ -52,15 +51,11 @@ public class VoiceRecorder {
         mRecorder.setAudioEncodingBitRate(1);
         mFile = file;
         mRecorder.setOutputFile(mFile.getAbsolutePath());
-        try {
-            mRecorder.prepare();
-            isRecording = true;
-            mRecorder.start();
-            mHandler.removeCallbacks(mRunnable);
-            mHandler.postDelayed(mRunnable, maxRecordDuration);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mRecorder.prepare();
+        isRecording = true;
+        mRecorder.start();
+        mHandler.removeCallbacks(mRunnable);
+        mHandler.postDelayed(mRunnable, maxRecordDuration);
 
         new Thread(new Runnable() {
             @Override
@@ -113,5 +108,19 @@ public class VoiceRecorder {
             return duration;
         }
         return 0;
+    }
+
+    public void discardRecord() {
+        isRecording = false;
+        if (mRecorder != null) {
+            mHandler.removeCallbacks(mRunnable);
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+        }
+
+        if (mFile != null && mFile.exists() && mFile.isFile()) {
+            mFile.delete();
+        }
     }
 }
