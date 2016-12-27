@@ -1,6 +1,5 @@
 package com.zyt.tx.ashupatoo.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,9 +20,7 @@ public class TalkBackActivity extends BaseActivity {
         TextView tvHint = (TextView) findViewById(R.id.tvHint);
         View talkButton = findViewById(R.id.ll_talk);
         talkButton.setOnTouchListener(new TalkListener());
-
     }
-
 
     private class TalkListener implements View.OnTouchListener {
         @Override
@@ -32,6 +29,7 @@ public class TalkBackActivity extends BaseActivity {
                 case MotionEvent.ACTION_DOWN:
                     Toast.makeText(TalkBackActivity.this, "ttt", Toast.LENGTH_SHORT).show();
                     break;
+
             }
             return false;
         }
