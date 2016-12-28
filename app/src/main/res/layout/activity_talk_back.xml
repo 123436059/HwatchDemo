@@ -33,6 +33,7 @@
         android:layout_alignParentTop="true" />
 
     <include
+        android:id="@+id/MicView"
         layout="@layout/talkcontainer_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
